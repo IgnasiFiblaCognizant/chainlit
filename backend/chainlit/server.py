@@ -66,7 +66,7 @@ mimetypes.add_type("text/css", ".css")
 
 ROOT_PATH = os.environ.get("CHAINLIT_ROOT_PATH", "")
 IS_SUBMOUNT = os.environ.get("CHAINLIT_SUBMOUNT", "") == "true"
-CHAINLIT_PING_TIMEOUT = os.environ.get("CHAINLIT_PING_TIMEOUT", 30)
+CHAINLIT_PING_TIMEOUT = int(os.environ.get("CHAINLIT_PING_TIMEOUT", 30))
 # If the app is a submount, no need to set the prefix
 PREFIX = ROOT_PATH if ROOT_PATH and not IS_SUBMOUNT else ""
 
