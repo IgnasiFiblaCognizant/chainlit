@@ -66,6 +66,7 @@ mimetypes.add_type("text/css", ".css")
 
 ROOT_PATH = os.environ.get("CHAINLIT_ROOT_PATH", "")
 IS_SUBMOUNT = os.environ.get("CHAINLIT_SUBMOUNT", "") == "true"
+CHAINLIT_PING_TIMEOUT = os.environ.get("CHAINLIT_PING_TIMEOUT", 30)
 # If the app is a submount, no need to set the prefix
 PREFIX = ROOT_PATH if ROOT_PATH and not IS_SUBMOUNT else ""
 
@@ -187,7 +188,7 @@ copilot_build_dir = get_build_dir(os.path.join("libs", "copilot"), "copilot")
 
 app = FastAPI(lifespan=lifespan)
 
-sio = socketio.AsyncServer(cors_allowed_origins=[], async_mode="asgi")
+sio = socketio.AsyncServer(cors_allowed_origins=[], async_mode="asgi", ping_timeout=CHAINLIT_PING_TIMEOUT)
 
 asgi_app = socketio.ASGIApp(
     socketio_server=sio,
