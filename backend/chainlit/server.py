@@ -188,7 +188,7 @@ copilot_build_dir = get_build_dir(os.path.join("libs", "copilot"), "copilot")
 
 app = FastAPI(lifespan=lifespan)
 
-sio = socketio.AsyncServer(cors_allowed_origins=[], async_mode="asgi", ping_timeout=CHAINLIT_PING_TIMEOUT)
+sio = socketio.AsyncServer(cors_allowed_origins=[], async_mode="asgi", ping_timeout=CHAINLIT_PING_TIMEOUT, ping_interval=1)
 
 asgi_app = socketio.ASGIApp(
     socketio_server=sio,
